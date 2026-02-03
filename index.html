@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caiptan Satiya | Data Analyst </title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+  --primary: #2563eb;        /* corporate blue */
+  --primary-dark: #1e40af;
+  --bg: #f8fafc;             /* soft gray */
+  --card: #ffffff;
+  --text: #0f172a;           /* dark slate */
+  --muted: #475569;          /* neutral gray */
+  --shadow: 0 8px 24px rgba(0,0,0,0.06);
+  --radius: 14px;
+}
+
+
+body.dark {
+  --primary: #60a5fa;        /* soft blue */
+  --primary-dark: #3b82f6;
+  --bg: #020617;             /* near-black */
+  --card: #0f172a;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background: var(--bg); color: var(--text); line-height: 1.6; transition: background 0.3s, color 0.3s; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ---------- NAV ---------- */
+    nav { 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 8%;
+  position: sticky;
+  top: 0;
+  background: transparent;
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+body.dark nav { background: rgba(15,23,42,0.9); }
+    nav h1 { font-weight: 800; color: var(--primary); }
+    nav ul { display: flex; gap: 32px; list-style: none; }
+    nav ul li a { font-weight: 500; color: var(--muted); transition: 0.3s; }
+    nav ul li a:hover { color: var(--primary); }
+    .theme-toggle { background: none; border: none; color: var(--muted); font-size: 20px; cursor: pointer; transition: 0.3s; }
+    .theme-toggle:hover { color: var(--primary); }
+
+    
+    
+nav.scrolled {
+  background: var(--bg);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+body.dark nav.scrolled {
+  background: var(--card);
+}
+
+    /* ---------- home ---------- */
+    .home { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; padding: 90px 8%; align-items: center; }
+    .home h2 { font-size: 48px; line-height: 1.2; margin-bottom: 20px; }
+    .home h2 span { color: var(--primary); }
+    .home p { color: var(--muted); font-size: 18px; margin-bottom: 30px; }
+    .home .buttons { display: flex; gap: 16px; }
+    .btn { padding: 14px 26px; border-radius: 12px; font-weight: 600; transition: 0.3s; display: inline-block; }
+    .btn.primary { background: var(--primary); color: white; }
+    .btn.primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+    .btn.secondary { background: white; border: 1px solid #e2e8f0; color: var(--text); }
+    body.dark .btn.secondary { background: var(--card); border: 1px solid #334155; color: var(--text); }
+    .btn.secondary:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+    .home-cards { position: relative; height: 420px; }
+    .card { position: absolute; background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; transition: background 0.3s; }
+    .card.small { width: 180px; }
+    .card.large { width: 280px; }
+    .card h4 { font-size: 14px; color: var(--muted); }
+    .card p { font-size: 28px; font-weight: 700; margin-top: 8px; color: var(--primary); }
+    .c1 { top: 20px; left: 0; }
+    .c2 { top: 120px; right: 0; }
+    .c3 { bottom: 0; left: 80px; }
+
+    /* ---------- SECTION ---------- */
+    section { padding: 90px 8%; }
+    section h3 { font-size: 36px; margin-bottom: 12px; }
+    section p.section-desc { color: var(--muted); margin-bottom: 50px; max-width: 600px; }
+
+    /* ---------- SKILLS ---------- */
+    .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+    .skill-card { background: var(--card); padding: 28px; border-radius: var(--radius); box-shadow: var(--shadow); transition: 0.3s; }
+    .skill-card:hover { transform: translateY(-6px); }
+    .skill-card h4 { margin-bottom: 12px; color: var(--primary); }
+    .skill-card ul { list-style: none; color: var(--muted); }
+
+    /* ---------- PROJECTS ---------- */
+    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+    .project-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; transition: 0.3s; }
+    .project-card:hover { transform: translateY(-6px); }
+    .project-card img { width: 100%; height: 180px; object-fit: cover; }
+    .project-card .content { padding: 24px; }
+    .tags { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+    .tag { font-size: 12px; padding: 6px 10px; border-radius: 20px; background: #ecfeff; color: var(--primary-dark); font-weight: 600; }
+    body.dark .tag { background: #0f172a; color: var(--primary); }
+
+    /* ---------- CERTIFICATIONS ---------- */
+    .certs { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; }
+    .cert-card { background: var(--card); padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow); transition: 0.3s; }
+    .cert-card:hover { transform: translateY(-4px); }
+    .cert-card h4 { color: var(--primary); margin-bottom: 8px; }
+    .cert-card a { color: var(--primary-dark); font-weight: 500; font-size: 14px; }
+
+    /* ---------- CONTACT ---------- */
+    .contact-info { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+    .contact-info a { color: var(--primary); font-weight: 500; }
+
+    /* ---------- FOOTER ---------- */
+    footer { text-align: center; padding: 40px 8%; color: var(--muted); }
+
+    @media (max-width: 900px) { .home { grid-template-columns: 1fr; } .home-cards { height: 360px; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <h1>Caiptan Satiya</h1>
+    <ul>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><button class="theme-toggle" id="theme-toggle">🌙</button></li>
+    </ul>
+  </nav>
+
+  <!-- home -->
+  <section class="home">
+    <div>
+      <h2>Turning <span>Data</span> into<br/>Actionable Insights</h2>
+      <p>
+        Aspiring Data Analyst pursuing MCA at Quantum University with expertise in Python, SQL, Power BI, and Excel.
+        Passionate about transforming raw data into meaningful business decisions.
+      </p>
+    <div class="buttons">
+  <a class="btn primary" href="#projects">View Projects</a>
+
+  <a class="btn secondary"
+     href="CaiptanSatiya_Resume.pdf"
+     target="_blank"
+     rel="noopener noreferrer">
+    View Resume
+  </a>
+
+  <a class="btn secondary"
+     href="CaiptanSatiya_Resume.pdf"
+     download>
+    Download Resume
+  </a>
+</div>
+
+    </div>
+
+    <div class="home-cards">
+      <div class="card small c1">
+        <h4>Dashboards Built</h4>
+        <p>6+</p>
+      </div>
+      <div class="card large c2">
+        <h4>Data Processed</h4>
+        <p>500K+ rows</p>
+      </div>
+      <div class="card small c3">
+        <h4>Projects Completed</h4>
+        <p>6</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h3>Skills & Tools</h3>
+    <p class="section-desc">Core analytics stack and technologies I work with</p>
+<div class="skills">
+
+  <div class="skill-card">
+    <h4>Core Analytics</h4>
+    <ul>
+      <li>Python (Pandas, NumPy)</li>
+      <li>SQL (Joins, CTEs, Subqueries)</li>
+      <li>Microsoft Excel (Pivot Tables, Power Query)</li>
+    </ul>
+  </div>
+
+  <div class="skill-card">
+    <h4>Data Visualization & BI</h4>
+    <ul>
+      <li>Power BI (DAX, Data Modeling)</li>
+      <li>Tableau (Basic)</li>
+
+      <li>Dashboard Design & Storytelling</li>
+    </ul>
+  </div>
+
+  <div class="skill-card">
+    <h4>Data Analysis & EDA</h4>
+    <ul>
+      <li>Data Cleaning & Wrangling</li>
+      <li>EDA using Python & BI tools</li>
+
+      <li>Outlier & Missing Value Treatment</li>
+    </ul>
+  </div>
+
+  <div class="skill-card">
+    <h4>Statistics & Business</h4>
+    <ul>
+      <li>Descriptive Statistics</li>
+      <li>Hypothesis Testing, A/B Testing</li>
+      <li>Business & KPI Analysis</li>
+    </ul>
+  </div>
+
+  <div class="skill-card">
+    <h4>Tools & Workflow</h4>
+    <ul>
+      <li>Jupyter Notebook</li>
+      <li>Git & GitHub</li>
+      <li>Basic ETL Concepts</li>
+    </ul>
+  </div>
+
+</div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+  <h3>Featured Projects</h3>
+  <p class="section-desc">Real-world analytics projects with business impact</p>
+
+  <div class="projects">
+
+    <!-- Project 1 -->
+    <div class="project-card">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" loading="lazy" />
+      <div class="content">
+        <h4>Sales Performance & Profit Dashboard</h4>
+        <div class="tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">DAX</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Excel</span>
+          <span class="tag">Data Modeling</span>
+          <span class="tag">Business Intelligence</span>
+        </div>
+<p>
+• Built Power BI dashboard to analyze multi-region sales & profit trends<br/>
+• Created DAX measures for margin, contribution & KPI tracking<br/>
+• Enabled business teams to monitor performance and improve decisions
+</p>
+
+<br>
+
+        <a href="https://github.com/CaiptanSatiya/Sales-Performance-Profit-Analysis-Dashboard" target="_blank" class="btn secondary">
+          View on GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+      <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786" loading="lazy" />
+      <div class="content">
+        <h4>Vendor Sales & Profitability Analysis</h4>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">Data Cleaning</span>
+          <span class="tag">EDA</span>
+          <span class="tag">Profitability Analysis</span>
+          <span class="tag">Vendor Insights</span>
+        </div>
+<p>
+• Analyzed vendor-level sales & profitability using Python and Power BI<br/>
+• Identified high-margin and loss-making vendors through EDA<br/>
+• Provided insights to optimize vendor selection and procurement
+</p>
+
+<br>
+        <a href="https://github.com/CaiptanSatiya/Vendor-Sales-Profitability-Analysis" target="_blank" class="btn secondary">
+          View on GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Project 3 (TATA Retail) -->
+    <div class="project-card">
+      <img src="https://images.unsplash.com/photo-1601598851547-4302969d0614"  loading="lazy"/>
+      <div class="content">
+        <h4>Tata Retail Sales & Customer Insights Dashboard</h4>
+        <div class="tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">DAX</span>
+          <span class="tag">Retail Analytics</span>
+          <span class="tag">Customer Segmentation</span>
+          <span class="tag">Sales Forecasting</span>
+          <span class="tag">Product Performance</span>
+          <span class="tag">Business Reporting</span>
+        </div>
+<p>
+• Developed Power BI dashboards for retail sales & customer insights<br/>
+• Performed customer segmentation and product performance analysis<br/>
+• Delivered actionable insights for strategic retail decisions
+</p>
+
+<br>
+        <a href="https://github.com/CaiptanSatiya/Tata-Retail-Sales-Customer-Insights-" target="_blank" class="btn secondary">
+          View on GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-card">
+      <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c" loading="lazy" />
+      <div class="content">
+        <h4>Customer Shopping Behavior Analysis</h4>
+        <div class="tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Excel</span>
+          <span class="tag">Data Analysis</span>
+          <span class="tag">Customer Insights</span>
+          <span class="tag">Trend Analysis</span>
+          <span class="tag">Marketing Analytics</span>
+          <span class="tag">Dashboard Design</span>
+        </div>
+        <p>
+• Analyzed customer shopping patterns to study spending behavior, purchase frequency, and category preferences<br/>
+• Created Power BI dashboards to visualize trends and customer segments<br/>
+• Generated insights to support targeted marketing and customer engagement strategies
+</p>
+<br>
+        <a href="https://github.com/CaiptanSatiya/Customer-Shopping-Behavior-Analysis" target="_blank" class="btn secondary">
+          View on GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Project 5 -->
+    <div class="project-card">
+      <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0"  loading="lazy"/>
+      <div class="content">
+        <h4>Employee Attendance & Workforce Analytics</h4>
+        <div class="tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">HR Analytics</span>
+          <span class="tag">Excel</span>
+          <span class="tag">Attendance Tracking</span>
+          <span class="tag">Workforce Planning</span>
+          <span class="tag">Operational Insights</span>
+        </div>
+      <p>
+• Developed an HR analytics dashboard to track employee attendance, absenteeism, and workforce trends<br/>
+• Analyzed patterns to identify inefficiencies and high-absence periods<br/>
+• Enabled HR teams to improve workforce planning and operational decision-making
+</p>
+<br>
+
+       <a href="https://github.com/CaiptanSatiya/Employee-Attendance-Workforce-Analytics" target="_blank" class="btn secondary">
+        View on GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Project 6 -->
+    <div class="project-card">
+      <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43"loading="lazy" />
+      <div class="content">
+        <h4>OYO Hotel Booking & Revenue Analysis</h4>
+        <div class="tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Hospitality Analytics</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Revenue Management</span>
+          <span class="tag">Occupancy Analysis</span>
+          <span class="tag">Pricing Strategy</span>
+          <span class="tag">Business Insights</span>
+        </div>
+      <p>
+• Analyzed hotel booking and occupancy data to identify demand patterns and revenue trends<br/>
+• Evaluated pricing and occupancy metrics to uncover peak and low-demand periods<br/>
+• Provided insights to support revenue optimization and pricing strategy decisions
+</p>
+<br>
+        <a href="https://github.com/CaiptanSatiya/OYO-Hotel-Booking-Revenue-Analysis" target="_blank" class="btn secondary">
+          View on GitHub
+        </a>
+      </div>
+    </div>
+    
+
+  </div>
+</section>
+
+
+
+  <!-- CERTIFICATIONS -->
+<section id="certifications">
+  <h3>Certifications</h3>
+  <p class="section-desc">Professional certifications and learning programs completed</p>
+
+  <div class="certs">
+        <!-- FORAGE -->
+    <div class="cert-card">
+      <h4>Forage – Data Analytics Virtual Experience</h4>
+<p>Data Analytics, Data Visualization, GenAI-powered Analytics</p>
+<a href="javascript:void(0)" onclick="openPopup('forage')">View Certificate</a>
+
+    </div>
+
+
+       <!-- CISCO -->
+    <div class="cert-card">
+      <h4>Cisco – Data Analyst Essentials</h4>
+<p>Data Analysis Fundamentals, Business Insights, Analytics Workflow</p>
+<a href="javascript:void(0)" onclick="openPopup('cisco')">View Certificate</a>
+
+    </div>
+
+    <!-- KAGGLE -->
+    <div class="cert-card">
+      <h4>Kaggle – Data Analysis Skills</h4>
+<p>Python, Pandas, Data Cleaning, Data Visualization, SQL</p>
+<a href="javascript:void(0)" onclick="openPopup('kaggle')">View Certificate</a>
+
+    </div>
+
+    <!-- HACKERRANK -->
+    <div class="cert-card">
+<h4>HackerRank – SQL & Python</h4>
+<p>SQL (Basic & Intermediate), Python (Basic)</p>
+<a href="javascript:void(0)" onclick="openPopup('hackerrank')">View Certificate</a>
+    </div>
+ 
+
+    <!-- ANALYTICS VIDHYA -->
+    <!-- <div class="cert-card">
+      <h4>Analytics Vidhya</h4>
+      <p>Power BI, Tableau, Pandas, Python & GenAI</p>
+      <a href="javascript:void(0)" onclick="openPopup('av')">View Certificate</a>
+    </div> -->
+
+    <!-- SIMPLILEARN -->
+    <!-- <div class="cert-card">
+      <h4>Simplilearn</h4>
+      <p>Data Analytics</p>
+      <a href="javascript:void(0)" onclick="openPopup('simplilearn')">View Certificate</a>
+    </div> -->
+
+
+  </div>
+</section>
+
+<!-- POPUP -->
+<div id="popup" style="
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.6);
+">
+  <div style="
+    background:#fff;
+    width:80%;
+    margin:5% auto;
+    padding:15px;
+  ">
+    <span onclick="closePopup()" style="cursor:pointer;font-size:20px;">✖</span>
+    <h3 id="popupTitle"></h3>
+    <div id="popupImages"></div>
+  </div>
+</div>
+
+<script>
+  const certificates = {
+        forage: {
+      title: "Forage Certificates",
+      images: [
+        "data analytics forage.jpg",
+        "data visualization forage.jpg",
+        "genai forage.jpg"
+      ]
+    },
+    hackerrank: {
+      title: "HackerRank Certificates",
+      images: [
+        "sql_basic hacker.jpg",
+        "sql_intermediate hacker.jpg",
+        "python_basic certificate hacker.jpg"
+      ]
+    },
+    kaggle: {
+      title: "Kaggle Certificates",
+      images: [
+        "Pandas(kaggle).png",
+        "Python(kaggle).png",
+        "Intro to SQL(kaggle).png",
+        "Data Cleaning(kaggle).png",
+        "Intro to Programming(kaggle).png",
+        "Data Visualization(kaggle).png"
+      ]
+    },
+    cisco: {
+      title: "Cisco Certificates",
+      images: [
+        "data_analyst_completion_(cisco).jpg",
+        "Data Analytics Essentials(cisco).jpg",
+      ]
+    },
+    av: {
+      title: "Analytics Vidhya Certificates",
+      images: [
+        "tableau(analytics vidya).jpg",
+        "py & genai(analytics vidya).jpg",
+        "powerbi(analytics vidya).jpg",
+        "pandas for da in py(analytics vidya).jpg",
+        "intro to python(analytics vidya).jpg",
+        "analyst ai agent(analytics vidhya).jpg"
+      ]
+    },
+    simplilearn: {
+      title: "Simplilearn Certificate",
+      images: [
+        "Introduction_to_Data_Analytics(simplilearn).jpg"
+      ]
+    }
+  };
+
+  function openPopup(type) {
+    document.getElementById("popupTitle").innerText = certificates[type].title;
+    const container = document.getElementById("popupImages");
+    container.innerHTML = "";
+
+    certificates[type].images.forEach(img => {
+      container.innerHTML += `
+        <img src="${img}" width="300"
+        style="margin:10px;cursor:pointer;"
+        onclick="window.open(this.src,'_blank')">
+      `;
+    });
+
+    document.getElementById("popup").style.display = "block";
+  }
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+</script>
+
+
+  <!-- CONTACT -->
+<section id="contact">
+  <h3>Get in Touch</h3>
+  <p class="section-desc">Open to data analyst opportunities and collaborations</p>
+
+  <div class="contact-info">
+    <a href="mailto:caiptansatiya@gmail.com">
+      caiptansatiya@gmail.com
+    </a>
+
+    <a href="https://github.com/CaiptanSatiya" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/caiptan-satiya-405315360/" target="_blank">LinkedIn</a>
+  </div>
+
+  <a class="btn primary" href="mailto:caiptansatiya@gmail.com">
+    Email Me
+  </a>
+</section>
+
+
+  <footer>
+    © 2026 Caiptan Satiya Portfolio. Built with ❤️ and data.
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+      body.classList.add('dark');
+      themeToggle.textContent = '☀️';
+    } else {
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      const theme = body.classList.contains('dark') ? 'dark' : 'light';
+      localStorage.setItem('theme', theme);
+      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    });
+  </script>
+  <script>
+  const nav = document.querySelector("nav");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+      nav.classList.add("scrolled");
+    } else {
+      nav.classList.remove("scrolled");
+    }
+  });
+</script>
+
+
+</body>
+</html>
+
+
+this final i have  as of now 
